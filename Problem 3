@@ -1,0 +1,50 @@
+package NumRangeInterviewQuestion;
+
+import java.util.*;
+
+public class NumRangeInterviewQuestion {
+
+	public static void main(String[] args) {
+		int[] A = {10, 5, 1, 0, 2};
+		int B = 6;
+		int C = 8;
+		numRange(A, B, C);
+	}
+
+	public static void numRange(int[] A, int B, int C) {
+		ArrayList<Pairs> rangeOfResults = new ArrayList<Pairs>();
+		for (int i = 0; i < A.length; i++) {
+			int sumSoFar = 0;
+			for (int j = i; j < A.length; j++) {
+				sumSoFar += A[j];
+				if (sumSoFar > C) break;
+				else if (sumSoFar < B) continue;
+				else rangeOfResults.add(new Pairs(i, j));
+			}
+		}
+		printSolution(rangeOfResults, A);
+    }
+
+	public static void printSolution(ArrayList<Pairs> rangeOfResults, int[] A) {
+		System.out.println("Array: " + Arrays.toString(A));
+		System.out.println("Total Pairs: " + rangeOfResults.size() + "\n");
+		for (int i = 0; i < rangeOfResults.size(); i++) {
+			Pairs temp = rangeOfResults.get(i);
+			System.out.println("Range: [" + temp.leftPointer + ", " + temp.rightPointer +"]");
+			int[] subArray = Arrays.copyOfRange(A, temp.leftPointer, temp.rightPointer + 1);
+			System.out.println("SubArray: " + Arrays.toString(subArray));
+			int sum = 0;
+			for (int j =  0; j < subArray.length; j++) sum += subArray[j];
+			System.out.println("Sum: " + sum + "\n");
+		}
+	}
+}
+
+class Pairs {
+	int leftPointer;
+	int rightPointer;
+	public Pairs (int leftPointer, int rightPointer) {
+		this.leftPointer = leftPointer;
+		this.rightPointer = rightPointer;
+	}
+}
