@@ -1,0 +1,36 @@
+package MatrixInterviewQuestions;
+
+public class MatrixInterviewQuestions {
+
+	public static void main(String[] args) {
+		for (int i = 1; i < 10; i++) createMatrix(i);
+	}
+
+	public static void createMatrix (int n) {
+		int sizeOfArray = n * 2 - 1;
+		int[][] matrix = new int[sizeOfArray][sizeOfArray];
+		for (int i = 0; i < matrix.length/2 + 1; i++) {
+			int counter = 0;
+			int value = n;
+			for (int j = 0; j < matrix[i].length/2 + 1; j++) {
+				matrix[i][j] = value;
+				matrix[i][sizeOfArray - 1 - j] = value;
+				matrix[sizeOfArray - 1 - i][j] = value;
+				matrix[sizeOfArray - 1 - i][sizeOfArray - 1 - j] = value;
+				if (counter++ < i) value--;
+			}
+		}
+		printMatrix(matrix, n);
+	}
+
+	public static void printMatrix (int[][] matrix, int n) {
+		System.out.println("Size of Matrix: " + n);
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				System.out.print(matrix[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+}
