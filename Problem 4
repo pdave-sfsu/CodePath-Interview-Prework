@@ -1,0 +1,36 @@
+package nextGreater;
+
+import java.util.Arrays;
+
+public class nextGreater {
+
+	public static void main(String[] args) {
+		int[] A = {3, 2, 1};
+		nextGreaterInterviewQuestion(A);
+		int[] B = {4, 5, 2, 10};
+		nextGreaterInterviewQuestion(B);
+	}
+
+	public static void nextGreaterInterviewQuestion(int[] A) {
+		int[] greaterArray = new int[A.length];
+		for (int i = 0; i < A.length; i++) {
+			for (int j = i + 1; j < A.length; j++) {
+				if (A[j] > A[i]) {
+					greaterArray[i] = A[j];
+					break;
+				} else if (j + 1 == A.length) {
+					greaterArray[i] = -1;
+					break;
+				}
+			}
+		}
+		greaterArray[A.length - 1] = -1;
+		printArray(A, greaterArray);
+    }
+
+	public static void printArray (int[] original, int[] updated) {
+		System.out.println("Original Array: " + Arrays.toString(original));
+		System.out.println("Updated Array: " + Arrays.toString(updated) + "\n");
+	}
+
+}
